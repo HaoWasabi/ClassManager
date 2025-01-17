@@ -1,0 +1,81 @@
+Table User{
+  user_id varchar [pk]
+  email varchar [not null]
+  password varchar [not null]
+  state int [not null]
+}
+
+Table Student {
+    student_id int [pk]
+    class_id int [pk]
+    name varchar [not null]
+    email varchar 
+    phone varchar
+    bonus_summary int
+    absence_summary int
+    final_score float
+    role int [not null]
+    state int [not null]
+}
+
+Ref: Student.class_id > Class.class_id
+
+Table Class {
+    class_id int [pk]
+    creator_id int [pk]
+    teacher_id int [pk]
+    name varchar [not null]
+    description varchar
+    state int [not null]
+}
+
+Ref: Class.creator_id > User.user_id
+Ref: Class.teacher_id > Teacher.teacher_id
+
+Table Teacher {
+    teacher_id int [pk]
+    name varchar [not null]
+    email varchar 
+    phone varchar
+    state int [not null]
+}
+
+Table Bonus {
+  bonus_id int [pk]
+  student_id int [pk]
+  amount int
+  date date
+  state int [not null]
+}
+Ref: Bonus.student_id > Student.student_id
+
+Table Absence {
+  absence_id int [pk]
+  student_id int [pk]
+  reason varchar
+  date date
+  state int [not null]
+}
+
+Ref: Absence.student_id > Student.student_id
+
+Table Coefficient {
+  coefficient_id int [pk]
+  creator_id int
+  name varchar [not null]
+  value float [not null]
+  state int [not null]
+}
+Ref: Coefficient.creator_id > User.user_id
+
+Table Score {
+  score_id int [pk]
+  student_id int [pk]
+  coefficient_id int [pk]
+  name varchar [not null]
+  score float [not null]
+  state int [not null]
+}
+
+Ref: Score.student_id > Student.student_id
+Ref: Score.coefficient_id > Coefficient.coefficient_id
