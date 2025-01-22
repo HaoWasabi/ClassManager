@@ -26,6 +26,26 @@ class CoefficientDAL(BaseDAL):
         finally:
             self.close_connection()
             
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS coefficient''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table coefficient: {e}")
+        finally:
+            self.close_connection()
+            
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM coefficient''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table coefficient: {e}")
+        finally:
+            self.close_connection()
+   
     def insert(self, coefficient: CoefficientDTO) -> Optional[int]:
         try:
             self.open_connection()

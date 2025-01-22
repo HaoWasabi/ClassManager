@@ -1,5 +1,5 @@
 class TeacherDTO:
-    def __init__(self, teacher_id: int, name: str, email: str, phone: str, state: int):
+    def __init__(self, teacher_id: int, name: str, email: str, phone: str, state: int = 1):
         self.__teacher_id = teacher_id
         self.__name = name
         self.__email = email

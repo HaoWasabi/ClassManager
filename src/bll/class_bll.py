@@ -12,6 +12,12 @@ class ClassBLL(Singleton):
     def create_table(self):
         self.__class_dal.create_table()
         
+    def drop_table(self):
+        self.__class_dal.drop_table()
+        
+    def clear_table(self):
+        self.__class_dal.clear_table()
+        
     def insert(self, class_: ClassDTO) -> Optional[int]:
         return self.__class_dal.insert(class_)
     

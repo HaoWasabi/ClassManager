@@ -12,6 +12,12 @@ class UserBLL(Singleton):
     def create_table(self):
         self.__user_dal.create_table()
         
+    def drop_table(self):
+        self.__user_dal.drop_table()
+        
+    def clear_table(self):
+        self.__user_dal.clear_table()
+        
     def insert(self, user: UserDTO) -> Optional[int]:
         return self.__user_dal.insert(user)
     

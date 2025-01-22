@@ -28,6 +28,26 @@ class ClassDAL(BaseDAL):
         finally:
             self.close_connection()
             
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS class''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table class: {e}")
+        finally:
+            self.close_connection()
+            
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM class''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table class: {e}")
+        finally:
+            self.close_connection()
+            
     def insert(self, class_: ClassDTO) -> Optional[int]:
         try:
             self.open_connection()
@@ -43,7 +63,7 @@ class ClassDAL(BaseDAL):
     def update(self, class_: ClassDTO) -> bool:
         try:
             self.open_connection()
-            self.cursor.execute('''UPDATE class SET creator_id = ?, teacher_id = ?, name = ?, description = ?, state = ? WHERE class_id = ? AND state = 1''', (class_.get_creator_id(), class_.get_teacher_id(), class_.get_name(), class_.get_description(), class_.get_state(), class_.get_id()))
+            self.cursor.execute('''UPDATE class SET creator_id = ?, teacher_id = ?, name = ?, description = ?, state = ? WHERE class_id = ? AND state = 1''', (class_.get_creator_id(), class_.get_teacher_id(), class_.get_name(), class_.get_description(), class_.get_state(), class_.get_class_id()))
             self.connection.commit()
             return True
         except sqlite3.Error as e:

@@ -11,6 +11,12 @@ class BonusBLL(Singleton):
             
     def create_table(self):
         self.__bonus_dal.create_table()
+        
+    def drop_table(self):
+        self.__bonus_dal.drop_table()
+        
+    def clear_table(self):
+        self.__bonus_dal.clear_table()
             
     def insert(self, bonus: BonusDTO) -> Optional[int]:
         return self.__bonus_dal.insert(bonus)

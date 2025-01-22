@@ -11,6 +11,12 @@ class ScoreBLL(Singleton):
             
     def create_table(self):
         self.__score_dal.create_table()
+        
+    def drop_table(self):
+        self.__score_dal.drop_table()
+        
+    def clear_table(self):
+        self.__score_dal.clear_table()
             
     def insert(self, score: ScoreDTO) -> Optional[int]:
         return self.__score_dal.insert(score)

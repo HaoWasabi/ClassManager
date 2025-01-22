@@ -26,7 +26,27 @@ class ScoreDAL(BaseDAL):
             logger.error(f"Error creating table score: {e}")
         finally:
             self.close_connection()
+
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS score''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table score: {e}")
+        finally:
+            self.close_connection()
             
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM score''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table score: {e}")
+        finally:
+            self.close_connection()
+                       
     def insert(self, score: ScoreDTO) -> Optional[int]:
         try:
             self.open_connection()
@@ -42,7 +62,7 @@ class ScoreDAL(BaseDAL):
     def update(self, score: ScoreDTO) -> bool:
         try:
             self.open_connection()
-            self.cursor.execute('''UPDATE score SET student_id = ?, coefficient_id = ?, name = ?, score = ?, state = ? WHERE score_id = ? AND state = 1''', (score.get_student_id(), score.get_coefficient_id(), score.get_name(), score.get_score(), score.get_state(), score.get_id()))
+            self.cursor.execute('''UPDATE score SET student_id = ?, coefficient_id = ?, name = ?, score = ?, state = ? WHERE score_id = ? AND state = 1''', (score.get_student_id(), score.get_coefficient_id(), score.get_name(), score.get_score(), score.get_state(), score.get_score_id()))
             self.connection.commit()
             return True
         except sqlite3.Error as e:

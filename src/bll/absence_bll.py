@@ -12,6 +12,12 @@ class AbsenceBLL(Singleton):
     def create_table(self):
         self.__absence_dal.create_table()
             
+    def drop_table(self):
+        self.__absence_dal.drop_table()
+        
+    def clear_table(self):
+        self.__absence_dal.clear_table()
+        
     def insert(self, absence: AbsenceDTO) -> Optional[int]:
         return self.__absence_dal.insert(absence)
     

@@ -1,5 +1,5 @@
 class BonusDTO:
-    def __init__(self, bonus_id: int, student_id: int, amount: int, date: str, state: int):
+    def __init__(self, bonus_id: int, student_id: int, amount: int, date: str, state: int = 1):
         self.__bonus_id = bonus_id
         self.__student_id = student_id
         self.__amount = amount

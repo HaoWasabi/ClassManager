@@ -1,5 +1,5 @@
 class UserDTO:
-    def __init__(self, user_id: int, email: str, password: str, state: int):
+    def __init__(self, user_id: int, email: str, password: str, state: int = 1):
         self.__user_id = user_id
         self.__email = email
         self.__password = password

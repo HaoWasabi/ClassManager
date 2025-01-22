@@ -1,5 +1,5 @@
 class CoefficientDTO:
-    def __init__(self, coefficient_id: int, creator_id: int, name: str, value: float, state: int):
+    def __init__(self, coefficient_id: int, creator_id: int, name: str, value: float, state: int = 1):
         self.__coefficient_id = coefficient_id
         self.__creator_id = creator_id
         self.__name = name

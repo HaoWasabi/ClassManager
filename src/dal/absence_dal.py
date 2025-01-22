@@ -26,6 +26,26 @@ class AbsenceDAL(BaseDAL):
         finally:
             self.close_connection()
             
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS absence''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table absence: {e}")
+        finally:
+            self.close_connection()
+            
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM absence''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table absence: {e}")
+        finally:
+            self.close_connection()
+            
     def insert(self, absence: AbsenceDTO) -> Optional[int]:
         try:
             self.open_connection()

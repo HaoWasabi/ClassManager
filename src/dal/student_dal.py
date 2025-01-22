@@ -30,7 +30,27 @@ class StudentDAL(BaseDAL):
             logger.error(f"Error creating table student: {e}")
         finally:
             self.close_connection()
+    
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS student''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table student: {e}")
+        finally:
+            self.close_connection()
             
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM student''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table student: {e}")
+        finally:
+            self.close_connection()
+                    
     def insert(self, student: StudentDTO) -> Optional[int]:
         try:
             self.open_connection()

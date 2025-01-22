@@ -26,6 +26,26 @@ class BonusDAL(BaseDAL):
         finally:
             self.close_connection()
             
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS bonus''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table bonus: {e}")
+        finally:
+            self.close_connection()
+            
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM bonus''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table bonus: {e}")
+        finally:
+            self.close_connection()
+            
     def insert(self, bonus: BonusDTO) -> Optional[int]:
         try:
             self.open_connection()

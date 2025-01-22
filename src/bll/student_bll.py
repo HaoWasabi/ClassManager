@@ -12,6 +12,12 @@ class StudentBLL(Singleton):
     def create_table(self):
         self.__student_dal.create_table()
         
+    def drop_table(self):
+        self.__student_dal.drop_table()
+        
+    def clear_table(self):
+        self.__student_dal.clear_table()
+        
     def insert(self, student: StudentDTO) -> Optional[int]:
         return self.__student_dal.insert(student)
     

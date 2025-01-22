@@ -1,5 +1,5 @@
 class StudentDTO:
-    def __init__(self, student_id: int, class_id: int, name: str, email: str, phone: str, bonus_summary: int, absence_summary: int, final_score: float, role: int, state: int):
+    def __init__(self, student_id: int, class_id: int, name: str, email: str, phone: str, bonus_summary: int, absence_summary: int, final_score: float, role: int, state: int = 1):
         self.__student_id = student_id
         self.__class_id = class_id
         self.__name = name

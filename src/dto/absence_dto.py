@@ -1,5 +1,5 @@
 class AbsenceDTO:
-    def __init__(self, absence_id: int, student_id: int, reason: str, date: str, state: int):
+    def __init__(self, absence_id: int, student_id: int, reason: str, date: str, state: int = 1):
         self.__absence_id = absence_id
         self.__student_id = student_id
         self.__reason = reason

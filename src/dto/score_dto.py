@@ -1,5 +1,5 @@
 class ScoreDTO:
-    def __init__(self, score_id: int, student_id: int, coefficient_id: int, name: str, score: float, state: int):
+    def __init__(self, score_id: int, student_id: int, coefficient_id: int, name: str, score: float, state: int = 1):
         self.__score_id = score_id
         self.__student_id = student_id
         self.__coefficient_id = coefficient_id

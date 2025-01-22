@@ -1,5 +1,5 @@
 class ClassDTO:
-    def __init__(self, class_id: int, creator_id: int, teacher_id: int, name: str, description: str, state: int):
+    def __init__(self, class_id: int, creator_id: int, teacher_id: int, name: str, description: str, state: int = 1):
         self.__class_id = class_id
         self.__creator_id = creator_id
         self.__teacher_id = teacher_id

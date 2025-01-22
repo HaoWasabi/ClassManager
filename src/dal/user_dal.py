@@ -24,11 +24,31 @@ class UserDAL(BaseDAL):
             raise error
         finally:
             self.close_connection()
+
+    def drop_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DROP TABLE IF EXISTS user''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error dropping table user: {e}")
+        finally:
+            self.close_connection()
+            
+    def clear_table(self):
+        try:
+            self.open_connection()
+            self.cursor.execute('''DELETE FROM user''')
+            self.connection.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error clearing table user: {e}")
+        finally:
+            self.close_connection()
             
     def insert(self, user: UserDTO) -> Optional[int]:
         try:
             self.open_connection()
-            self.cursor.execute('''INSERT INTO user (user_id, email, password, state) VALUES (?, ?, ?, ?)''', (user.get_user_id(), user.get_email(), user.get_password(), user.get_state()))
+            self.cursor.execute('''INSERT INTO user (email, password, state) VALUES (?, ?, ?)''', (user.get_email(), user.get_password(), user.get_state()))
             self.connection.commit()
             return self.cursor.lastrowid
         except sqlite3.Error as error:

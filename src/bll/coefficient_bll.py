@@ -12,6 +12,12 @@ class CoefficientBLL(Singleton):
     def create_table(self):
         self.__coefficient_dal.create_table()
         
+    def drop_table(self):
+        self.__coefficient_dal.drop_table()
+        
+    def clear_table(self):
+        self.__coefficient_dal.clear_table()
+        
     def insert(self, coefficient: CoefficientDTO) -> Optional[int]:
         return self.__coefficient_dal.insert(coefficient)
     
