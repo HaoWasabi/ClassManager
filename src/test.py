@@ -1,6 +1,6 @@
 from bll import * 
 from dto import *
-from utils import *
+from utils.excel_file_handler import ExcelFileHandler
 
 class CheckDatabase:
     @staticmethod
@@ -72,7 +72,42 @@ class CheckDatabase:
         CheckDatabase.undelete_from_all_table(arr_table)
         CheckDatabase.get_all_before_print_all(arr_table)
         CheckDatabase.get_by_id_before_print_all(arr_table)   
+        
+class CheckExcel:
+    @staticmethod
+    def check_all():
+        # Tạo thêm sheet mới
+        ExcelFileHandler.add_sheet("Sheet2")
+        ExcelFileHandler.add_sheet("Sheet3")
+        
+        # Xóa sheet vừa tạo
+        ExcelFileHandler.delete_sheet("Sheet3")
+
+        # Ghi dữ liệu vào một ô trong sheet
+        ExcelFileHandler.write_cell("Sheet1", "A1", "Hello World")
+        ExcelFileHandler.write_cell("Sheet1", "B1", "Hello World")
+        ExcelFileHandler.write_cell("Sheet1", "A2", "Hello World")
+        ExcelFileHandler.write_cell("Sheet2", "A1", "Hello World")
+        ExcelFileHandler.write_cell("Sheet2", "A2", "Hello World")
+
+        # Đọc dữ liệu từ file Excel
+        data = ExcelFileHandler.read_excel("Sheet1")
+        if data is not None:
+            print("Dữ liệu từ file Excel:")
+            print(data)
+            
+        # Xóa dữ liệu tại một ô
+        ExcelFileHandler.delete_cell("Sheet2", "A1")
+        
+        # Xóa hàng thứ 2 trong sheet "Sheet1"
+        ExcelFileHandler.delete_row("Sheet1", 2)
+
+        # Xóa cột thứ 3 trong sheet "Sheet1"
+        ExcelFileHandler.delete_column("Sheet1", 2)
+
     
 if __name__ == '__main__':
     arr_table = [AbsenceBLL, BonusBLL, ClassBLL, CoefficientBLL, ScoreBLL, StudentBLL, TeacherBLL, UserBLL]
     CheckDatabase.check_all(arr_table)
+    
+    CheckExcel.check_all()
