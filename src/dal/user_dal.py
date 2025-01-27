@@ -72,7 +72,7 @@ class UserDAL(BaseDAL):
     def delete(self, user_id: int) -> bool:
         try:
             self.open_connection()
-            self.cursor.execute('''UPDATE user SET state = 0 WHERE user_id = ? AND state = 1''', (user_id,))
+            self.cursor.execute('''UPDATE user SET state = 0 WHERE user_id = ?''', (user_id,))
             self.connection.commit()
             return True
         except sqlite3.Error as error:

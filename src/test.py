@@ -1,21 +1,23 @@
+from gui import *
 from bll import * 
 from dto import *
+from tkinter import Tk
 from utils.excel_file_handler import ExcelFileHandler
 
 class CheckDatabase:
     @staticmethod
-    def create_all_tables(arr_table):
-        for table in arr_table:
+    def create_all_tables(bll_list):
+        for table in bll_list:
             table().create_table()        
             
     @staticmethod
-    def drop_all_tables(arr_table):
-        for table in arr_table:
+    def drop_all_tables(bll_list):
+        for table in bll_list:
             table().drop_table()
             
     @staticmethod
-    def clear_all_tables(arr_table):
-        for table in arr_table:
+    def clear_all_tables(bll_list):
+        for table in bll_list:
             table().clear_table()     
             
     @staticmethod
@@ -41,37 +43,37 @@ class CheckDatabase:
         ScoreBLL().update(ScoreDTO(1, 1, 1, 'b', 2.0))
     
     @staticmethod
-    def delete_from_all_table(arr_table):
-        for table in arr_table:
+    def delete_from_all_table(bll_list):
+        for table in bll_list:
             table().delete(1)     
             
     @staticmethod
-    def undelete_from_all_table(arr_table):
-        for table in arr_table:
+    def undelete_from_all_table(bll_list):
+        for table in bll_list:
             table().undelete(1)    
         
     @staticmethod
-    def get_all_before_print_all(arr_table):
-        for table in arr_table:
+    def get_all_before_print_all(bll_list):
+        for table in bll_list:
             for i in table().get_all():
                 print(i)
                 
     @staticmethod
-    def get_by_id_before_print_all(arr_table):
-        for table in arr_table:
+    def get_by_id_before_print_all(bll_list):
+        for table in bll_list:
             print(table().get_by_id(1))
             
     @staticmethod
-    def check_all(arr_table):
-        CheckDatabase.clear_all_tables(arr_table)
-        CheckDatabase.drop_all_tables(arr_table)
-        CheckDatabase.create_all_tables(arr_table)
+    def check_all(bll_list):
+        CheckDatabase.clear_all_tables(bll_list)
+        CheckDatabase.drop_all_tables(bll_list)
+        CheckDatabase.create_all_tables(bll_list)
         CheckDatabase.insert_into_all_table()
         CheckDatabase.update_from_all_table()
-        CheckDatabase.delete_from_all_table(arr_table)
-        CheckDatabase.undelete_from_all_table(arr_table)
-        CheckDatabase.get_all_before_print_all(arr_table)
-        CheckDatabase.get_by_id_before_print_all(arr_table)   
+        CheckDatabase.delete_from_all_table(bll_list)
+        CheckDatabase.undelete_from_all_table(bll_list)
+        CheckDatabase.get_all_before_print_all(bll_list)
+        CheckDatabase.get_by_id_before_print_all(bll_list)   
         
 class CheckExcel:
     @staticmethod
@@ -104,10 +106,25 @@ class CheckExcel:
 
         # Xóa cột thứ 3 trong sheet "Sheet1"
         ExcelFileHandler.delete_column("Sheet1", 2)
+        
+class CheckGUI:
+    @staticmethod
+    def check_signup_gui(parent: Tk):
+        SignupGUI(parent)
+        
+    @staticmethod
+    def check_login_gui(parent: Tk):
+        LoginGUI(parent)
+        
+    @staticmethod
+    def check_all(gui_list):
+        for table in gui_list:
+            root = Tk()
+            table(root)
 
-    
 if __name__ == '__main__':
-    arr_table = [AbsenceBLL, BonusBLL, ClassBLL, CoefficientBLL, ScoreBLL, StudentBLL, TeacherBLL, UserBLL]
-    CheckDatabase.check_all(arr_table)
-    
-    CheckExcel.check_all()
+    # bll_list = [AbsenceBLL, BonusBLL, ClassBLL, CoefficientBLL, ScoreBLL, StudentBLL, TeacherBLL, UserBLL]
+    # CheckDatabase.check_all(bll_list)
+    # CheckExcel.check_all()
+    gui_list = [LoginGUI, SignupGUI]
+    CheckGUI.check_all(gui_list)
